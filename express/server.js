@@ -17,26 +17,27 @@ const api = require("./utils/api");
  *  Returns a json object to mattermost
  */
 router.post("/anime", (req, res) => {
-  // Populate the anime object
-  let animeObj = new anime({
-    searchTerm: req.body.text,
-    animeToken: config.token,
-    jsonResponse: {
-      text: '',
-      'response_type': 'in_channel'
-    }
-  });
+  res.json({ results: 'this works just fine'})
+  // // Populate the anime object
+  // let animeObj = new anime({
+  //   searchTerm: req.body.text,
+  //   animeToken: config.token,
+  //   jsonResponse: {
+  //     text: '',
+  //     'response_type': 'in_channel'
+  //   }
+  // });
 
-  // Check if token match
-  if (animeObj.animeToken.indexOf(req.body.token) > -1) {
-    let apiObj = new api(animeObj, req, res);
+  // // Check if token match
+  // if (animeObj.animeToken.indexOf(req.body.token) > -1) {
+  //   let apiObj = new api(animeObj, req, res);
 
-    apiObj.searchAnime();
-  } else {
-    animeObj.jsonResponse.text = 'Token does not match';
+  //   apiObj.searchAnime();
+  // } else {
+  //   animeObj.jsonResponse.text = 'Token does not match';
 
-    res.send(animeObj.jsonResponse);
-  }
+  //   res.send(animeObj.jsonResponse);
+  // }
 });
 
 // router.get("/", (req, res) => {

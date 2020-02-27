@@ -5,6 +5,7 @@
   "main": "functions/server.js",
   "scripts": {
     "build": "netlify-lambda build express",
+    "install": "netlify-lambda install express",
     "start": "nodemon server-local.js"
   },
   "repository": {
@@ -24,6 +25,7 @@
   "homepage": "https://github.com/jrock2004/anime-bot#readme",
   "devDependencies": {
     "body-parser": "^1.19.0",
+    "bufferutil": "^4.0.1",
     "encoding": "^0.1.12",
     "express": "^4.17.1",
     "moment": "^2.24.0",
@@ -31,6 +33,7 @@
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
     "turndown": "^5.0.3",
-    "serverless-http": "^2.3.2"
+    "serverless-http": "^2.3.2",
+    "utf-8-validate": "^5.0.2"
   }
 }
