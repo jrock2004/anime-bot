@@ -6,7 +6,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const router = express.Router();
 const anime = require("./models/anime");
-// const config = require("./config");
+const config = require("./config");
 // const api = require("./utils/api");
 
 /**
