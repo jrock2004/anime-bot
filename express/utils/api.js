@@ -55,14 +55,12 @@ module.exports = class internalRequests {
       }),
     };
 
-    let self = this;
-
     fetch(url, options)
       .then(this.handleResponse)
       .then(data => {
-        self.handleData(data, self);
+        this.handleData(data, this);
       })
-      .catch(this.handleError);
+      .catch(e => this.handleError(e, this));
   }
 
   handleResponse(response) {
@@ -83,11 +81,12 @@ module.exports = class internalRequests {
     self.res.send(self.anime.jsonResponse);
   }
 
-  handleError(error) {
-    process.stdout.write(String(error));
-    this.anime.jsonResponse.text = 'Anime not found!';
+  handleError(error, self) {
+    console.log(error);
 
-    this.res.send(this.anime.jsonResponse);
+    self.anime.jsonResponse.text = 'Anime not found!';
+
+    self.res.send(self.anime.jsonResponse);
   }
 
   buildAnime(anime) {
