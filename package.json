@@ -4,8 +4,7 @@
   "description": "A bot for Slack and Mattermost to look up anime",
   "main": "functions/server.js",
   "scripts": {
-    "build": "netlify-lambda build express",
-    "install": "netlify-lambda install express",
+    "build": "netlify-lambda build --config ./webpack.functions.js express",
     "start": "nodemon server-local.js"
   },
   "repository": {
