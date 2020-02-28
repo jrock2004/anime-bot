@@ -1,7 +1,8 @@
+
 const moment = require('moment'),
-   TurndownService = require('turndown'),
-   //turndownService = new TurndownService(),
-   fetch = require('node-fetch');
+   TurndownService = require('turndown').default,
+   turndownService = new TurndownService(),
+   fetch = require('node-fetch').default;
 
 class internalRequests {
   constructor(anime, req, res) {
@@ -94,7 +95,7 @@ class internalRequests {
 
     responseText += this.getBannerImage(anime);
     responseText += this.getTitle(anime);
-    //responseText += `> ${turndownService.turndown(anime.description).replace(/\n/g, " ")}\n\n`;
+    responseText += `> ${turndownService.turndown(anime.description).replace(/\n/g, " ")}\n\n`;
     responseText += this.getNextEpisode(anime);
     responseText += this.getGenres(anime);
     responseText += this.getExternalLinks(anime);
