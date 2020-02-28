@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const router = express.Router();
 const anime = require("./models/anime");
 const config = require("./config");
-// const api = require("./utils/api");
+const api = require("./utils/api");
 
 /**
  *  Does an API lookup to ANN and returns information for the requested anime
@@ -26,8 +26,6 @@ router.post("/anime", (req, res) => {
       'response_type': 'in_channel'
     }
   });
-
-  console.log(animeObj)
 
   res.json({ results: 'this works just fine'})
 
