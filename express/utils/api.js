@@ -1,15 +1,15 @@
-// const moment = require('moment'),
-//   TurndownService = require('turndown'),
-//   turndownService = new TurndownService(),
-//   fetch = require('node-fetch');
+const moment = require('moment'),
+  TurndownService = require('turndown'),
+  turndownService = new TurndownService(),
+  fetch = require('node-fetch');
 
 class internalRequests {
-  // constructor(anime, req, res) {
-  //   this.req = req;
-  //   this.res = res;
-  //   this.anime = anime;
-  //   this.isMarkdown = true;
-  // }
+  constructor(anime, req, res) {
+    this.req = req;
+    this.res = res;
+    this.anime = anime;
+    this.isMarkdown = true;
+  }
 
   // searchAnime() {
   //   const variables = {

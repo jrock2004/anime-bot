@@ -31,8 +31,8 @@ router.post("/anime", (req, res) => {
 
   // Check if token match
   if (animeObj.animeToken.indexOf(req.body.token) > -1) {
-    //let apiObj = new api(animeObj, req, res);
-    let apiObj = new internalRequests();
+    let apiObj = new internalRequests(animeObj, req, res);
+    // let apiObj = new internalRequests();
 
     //apiObj.searchAnime();
   } else {
