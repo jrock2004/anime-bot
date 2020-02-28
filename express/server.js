@@ -9,6 +9,8 @@ const anime = require("./models/anime");
 const config = require("./config");
 const internalRequests = require("./utils/api");
 
+app.use(bodyParser.json());
+
 /**
  *  Does an API lookup to ANN and returns information for the requested anime
  *  @req - Request
@@ -55,7 +57,6 @@ router.post("/anime", (req, res) => {
 // router.get("/another", (req, res) => res.json({ temp: 1 }));
 // router.post("/", (req, res) => res.json({ postBody: req.body }));
 
-app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
 app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
