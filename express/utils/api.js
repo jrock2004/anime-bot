@@ -1,7 +1,7 @@
-const moment = require('moment'),
-  TurndownService = require('turndown'),
-  turndownService = new TurndownService(),
-  fetch = require('node-fetch');
+// const moment = require('moment'),
+//   TurndownService = require('turndown'),
+//   turndownService = new TurndownService(),
+//   fetch = require('node-fetch');
 
 class internalRequests {
   // constructor(anime, req, res) {
