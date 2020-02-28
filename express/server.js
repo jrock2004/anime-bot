@@ -5,7 +5,7 @@ const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
 const router = express.Router();
-// const anime = require("./models/anime");
+const anime = require("./models/anime");
 // const config = require("./config");
 // const api = require("./utils/api");
 
