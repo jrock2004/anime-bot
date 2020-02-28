@@ -29,7 +29,7 @@ router.post("/anime", (req, res) => {
 
   console.log(animeObj);
   console.log('------');
-  console.log(req.body);
+  console.log(req);
   
   // Check if token match
   if (animeObj.animeToken.indexOf(req.body.token) > -1) {
