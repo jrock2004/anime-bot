@@ -10,6 +10,9 @@ const config = require("./config");
 const internalRequests = require("./utils/api");
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 /**
  *  Does an API lookup to ANN and returns information for the requested anime
@@ -31,9 +34,7 @@ router.post("/anime", (req, res) => {
 
   console.log(animeObj);
   console.log('------');
-  console.log(req);
-  console.log('------');
-  console.log(res);
+  console.log(req.body);
   
   
   // Check if token match
