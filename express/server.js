@@ -5,9 +5,9 @@ const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
 const router = express.Router();
-const anime = require("./models/anime");
-const config = require("./config");
-const api = require("./utils/api");
+// const anime = require("./models/anime");
+// const config = require("./config");
+// const api = require("./utils/api");
 
 /**
  *  Does an API lookup to ANN and returns information for the requested anime
@@ -50,7 +50,7 @@ router.post("/anime", (req, res) => {
 
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
-// app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
+app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 module.exports = app;
 module.exports.handler = serverless(app);
