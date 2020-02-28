@@ -1,8 +1,7 @@
-
 const moment = require('moment'),
-   TurndownService = require('turndown').default,
-   turndownService = new TurndownService(),
-   fetch = require('node-fetch').default;
+  TurndownService = require('turndown').default,
+  turndownService = new TurndownService(),
+  fetch = require('node-fetch').default;
 
 module.exports = class internalRequests {
   constructor(anime, req, res) {
@@ -14,8 +13,8 @@ module.exports = class internalRequests {
 
   searchAnime() {
     const variables = {
-      anime: this.anime.searchTerm
-    }
+      anime: this.anime.searchTerm,
+    };
 
     const query = `
       query ($anime: String) {
@@ -48,25 +47,26 @@ module.exports = class internalRequests {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify({
         query: query,
-        variables: variables
-      })
+        variables: variables,
+      }),
     };
 
     let self = this;
 
     fetch(url, options)
       .then(this.handleResponse)
-      .then((data) => {
+      .then(data => {
         self.handleData(data, self);
-      }).catch(this.handleError);
+      })
+      .catch(this.handleError);
   }
 
   handleResponse(response) {
-    return response.json().then((json) => {
+    return response.json().then(json => {
       return response.ok ? json : Promise.reject(json);
     });
   }
@@ -95,7 +95,7 @@ module.exports = class internalRequests {
 
     responseText += this.getBannerImage(anime);
     responseText += this.getTitle(anime);
-    responseText += `> ${turndownService.turndown(anime.description).replace(/\n/g, " ")}\n\n`;
+    responseText += `> ${turndownService.turndown(anime.description).replace(/\n/g, ' ')}\n\n`;
     responseText += this.getNextEpisode(anime);
     responseText += this.getGenres(anime);
     responseText += this.getExternalLinks(anime);
@@ -118,7 +118,7 @@ module.exports = class internalRequests {
     const title = anime.title.english || anime.title.romaji || anime.native;
 
     if (this.isMarkdown) {
-      return `# ${title} - ${anime.status}\n`
+      return `# ${title} - ${anime.status}\n`;
     } else {
       return `*${title}* - ${anime.status}\n\n`;
     }
@@ -152,9 +152,9 @@ module.exports = class internalRequests {
     genres.push(...anime.genres);
 
     if (this.isMarkdown) {
-      return `* *Genres:* ${genres.join(', ').replace(/,\s*$/, "")}\n`;
+      return `* *Genres:* ${genres.join(', ').replace(/,\s*$/, '')}\n`;
     } else {
-      return `• *Genres:* ${genres.join(', ').replace(/,\s*$/, "")}\n`;
+      return `• *Genres:* ${genres.join(', ').replace(/,\s*$/, '')}\n`;
     }
   }
 
@@ -162,7 +162,7 @@ module.exports = class internalRequests {
     let externalLinks = '';
 
     if (anime.externalLinks.length > 0) {
-      anime.externalLinks.map((link) => {
+      anime.externalLinks.map(link => {
         if (this.isMarkdown) {
           externalLinks += `[${link.site}](${link.url}), `;
         } else {
@@ -171,9 +171,9 @@ module.exports = class internalRequests {
       });
 
       if (this.isMarkdown) {
-        return `* **External Links:** ${externalLinks.replace(/,\s*$/, "")}\n`;
+        return `* **External Links:** ${externalLinks.replace(/,\s*$/, '')}\n`;
       } else {
-        return `• *External Links:* ${externalLinks.replace(/,\s*$/, "")}\n`;
+        return `• *External Links:* ${externalLinks.replace(/,\s*$/, '')}\n`;
       }
     }
 
@@ -187,4 +187,4 @@ module.exports = class internalRequests {
       return '• *Source:* Anilist\n\n';
     }
   }
-}
+};

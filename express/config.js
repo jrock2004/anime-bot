@@ -1,4 +1,4 @@
-const path = require("path"),
+const path = require('path'),
   rootPath = path.normalize(__dirname + '/..'),
   env = process.env.NODE_ENV || 'development';
 
@@ -6,16 +6,16 @@ let config = {
   development: {
     root: rootPath,
     app: {
-      name: 'anime-bot'
+      name: 'anime-bot',
     },
     port: process.env.PORT || 3000,
-    token: process.env.TOKEN || ['token']
+    token: process.env.TOKEN || ['token'],
   },
 
   test: {
     root: rootPath,
     app: {
-      name: 'anime-bot'
+      name: 'anime-bot',
     },
     port: process.env.PORT || 3000,
     token: process.env.TOKEN || ['token'],
@@ -24,10 +24,10 @@ let config = {
   production: {
     root: rootPath,
     app: {
-      name: 'anime-bot'
+      name: 'anime-bot',
     },
     port: process.env.PORT || 3000,
-    token: process.env.TOKEN || ['token']
+    token: process.env.TOKEN || ['token'],
   },
 };
 

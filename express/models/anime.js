@@ -6,8 +6,8 @@ module.exports = class AnimeModel {
     this.searchText = opts.searchText;
     this.animeToken = opts.animeToken;
     this.jsonResponse = opts.jsonResponse || {
-      'text': 'This is default text',
-      'response_type': 'in_channel'
-    }
+      text: 'This is default text',
+      response_type: 'in_channel',
+    };
   }
-}
+};

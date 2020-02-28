@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   env: {
     node: true,
-    es6: true
+    es6: true,
   },
-  extends: ["eslint:recommended"]
-}
+  extends: ['eslint:recommended'],
+};
