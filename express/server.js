@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const router = express.Router();
 const anime = require("./models/anime");
 const config = require("./config");
-const api = require("./utils/api");
+const internalRequests = require("./utils/api");
 
 /**
  *  Does an API lookup to ANN and returns information for the requested anime
@@ -32,7 +32,7 @@ router.post("/anime", (req, res) => {
   // Check if token match
   if (animeObj.animeToken.indexOf(req.body.token) > -1) {
     //let apiObj = new api(animeObj, req, res);
-    let apiObj = new api();
+    let apiObj = new internalRequests();
 
     //apiObj.searchAnime();
   } else {
