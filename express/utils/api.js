@@ -4,17 +4,12 @@ const moment = require('moment'),
   fetch = require('node-fetch');
 
 class api {
-  constructor(anime, req, res) {
-    console.log('sdfsdfsdfsdfsdfsdf');
-    console.log(anime);
-    console.log(req);
-    console.log(res);
-    
-    this.req = req;
-    this.res = res;
-    this.anime = anime;
-    this.isMarkdown = true;
-  }
+  // constructor(anime, req, res) {
+  //   this.req = req;
+  //   this.res = res;
+  //   this.anime = anime;
+  //   this.isMarkdown = true;
+  // }
 
   searchAnime() {
     const variables = {
