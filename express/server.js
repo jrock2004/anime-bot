@@ -29,16 +29,16 @@ router.post("/anime", (req, res) => {
 
   res.json({ results: 'this works just fine'})
 
-  // // Check if token match
-  // if (animeObj.animeToken.indexOf(req.body.token) > -1) {
-  //   let apiObj = new api(animeObj, req, res);
+  // Check if token match
+  if (animeObj.animeToken.indexOf(req.body.token) > -1) {
+    let apiObj = new api(animeObj, req, res);
 
-  //   apiObj.searchAnime();
-  // } else {
-  //   animeObj.jsonResponse.text = 'Token does not match';
+    apiObj.searchAnime();
+  } else {
+    animeObj.jsonResponse.text = 'Token does not match';
 
-  //   res.send(animeObj.jsonResponse);
-  // }
+    res.send(animeObj.jsonResponse);
+  }
 });
 
 // router.get("/", (req, res) => {

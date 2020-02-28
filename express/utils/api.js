@@ -5,6 +5,11 @@ const moment = require('moment'),
 
 class api {
   constructor(anime, req, res) {
+    console.log('sdfsdfsdfsdfsdfsdf');
+    console.log(anime);
+    console.log(req);
+    console.log(res);
+    
     this.req = req;
     this.res = res;
     this.anime = anime;
