@@ -4,7 +4,7 @@ const moment = require('moment'),
    turndownService = new TurndownService(),
    fetch = require('node-fetch').default;
 
-class internalRequests {
+module.exports = class internalRequests {
   constructor(anime, req, res) {
     this.req = req;
     this.res = res;
@@ -188,5 +188,3 @@ class internalRequests {
     }
   }
 }
-
-module.exports = internalRequests;

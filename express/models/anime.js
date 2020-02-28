@@ -1,4 +1,4 @@
-class anime {
+module.exports = class AnimeModel {
   constructor(opts) {
     if (!opts) opts = {};
 
@@ -11,5 +11,3 @@ class anime {
     }
   }
 }
-
-module.exports = anime;
