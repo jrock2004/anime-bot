@@ -27,14 +27,12 @@ router.post("/anime", (req, res) => {
     }
   });
 
-  res.json({ results: 'this works just fine'})
-
   // Check if token match
   if (animeObj.animeToken.indexOf(req.body.token) > -1) {
     let apiObj = new internalRequests(animeObj, req, res);
     // let apiObj = new internalRequests();
 
-    //apiObj.searchAnime();
+    apiObj.searchAnime();
   } else {
     animeObj.jsonResponse.text = 'Token does not match';
 
