@@ -11,6 +11,53 @@ module.exports = class internalRequests {
     this.isMarkdown = true;
   }
 
+  searchManga() {
+    const variables = {
+      anime: this.anime.searchTerm,
+    };
+
+    const query = `
+      query ($anime: String) {
+        Media (search: $anime, type: MANGA) {
+          id,
+          bannerImage,
+          title {
+            romaji
+            english
+            native
+          },
+          status,
+          description,
+          genres,
+          externalLinks {
+            url,
+            site
+          },  
+        }
+      }
+    `;
+
+    const url = 'https://graphql.anilist.co';
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        query: query,
+        variables: variables,
+      }),
+    };
+
+    fetch(url, options)
+      .then(this.handleResponse)
+      .then((data) => {
+        this.handleData(data, this, false);
+      })
+      .catch((e) => this.handleError(e, this));
+  }
+
   searchAnime() {
     const variables = {
       anime: this.anime.searchTerm,
@@ -57,26 +104,30 @@ module.exports = class internalRequests {
 
     fetch(url, options)
       .then(this.handleResponse)
-      .then(data => {
-        this.handleData(data, this);
+      .then((data) => {
+        this.handleData(data, this, true);
       })
-      .catch(e => this.handleError(e, this));
+      .catch((e) => this.handleError(e, this));
   }
 
   handleResponse(response) {
-    return response.json().then(json => {
+    return response.json().then((json) => {
       return response.ok ? json : Promise.reject(json);
     });
   }
 
-  handleData(data, self) {
+  handleData(data, self, isAnime) {
     const response = data.data.Media;
 
     if (self.req.body.response_url.indexOf('slack') > -1) {
       self.isMarkdown = false;
     }
 
-    self.anime.jsonResponse.text = self.buildAnime(response);
+    if (isAnime) {
+      self.anime.jsonResponse.text = self.buildAnime(response);
+    } else {
+      self.anime.jsonResponse.text = self.buildManga(response);
+    }
 
     self.res.send(self.anime.jsonResponse);
   }
@@ -98,6 +149,20 @@ module.exports = class internalRequests {
     responseText += this.getNextEpisode(anime);
     responseText += this.getGenres(anime);
     responseText += this.getExternalLinks(anime);
+    responseText += this.getSource();
+
+    return responseText;
+  }
+
+  buildManga(manga) {
+    let responseText = '';
+
+    responseText += this.getBannerImage(manga);
+    responseText += this.getTitle(manga);
+    responseText += `> ${turndownService.turndown(manga.description).replace(/\n/g, ' ')}\n\n`;
+    responseText += this.getRunningStatus(manga);
+    responseText += this.getGenres(manga);
+    responseText += this.getExternalLinks(manga);
     responseText += this.getSource();
 
     return responseText;
@@ -145,6 +210,14 @@ module.exports = class internalRequests {
     }
   }
 
+  getRunningStatus(manga) {
+    if (this.isMarkdown) {
+      return `* **Status:** ${manga.status}\n`;
+    } else {
+      return `• *Status:* ${manga.status}\n`;
+    }
+  }
+
   getGenres(anime) {
     let genres = [];
 
@@ -161,7 +234,7 @@ module.exports = class internalRequests {
     let externalLinks = '';
 
     if (anime.externalLinks.length > 0) {
-      anime.externalLinks.map(link => {
+      anime.externalLinks.map((link) => {
         if (this.isMarkdown) {
           externalLinks += `[${link.site}](${link.url}), `;
         } else {
