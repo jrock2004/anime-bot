@@ -30,7 +30,7 @@
     "dotenv-webpack": "^1.7.0",
     "encoding": "^0.1.12",
     "express": "^4.17.1",
-    "moment": "^2.25.1",
+    "moment": "^2.25.2",
     "netlify-lambda": "^1.6.3",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.3",
