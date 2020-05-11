@@ -35,7 +35,7 @@
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.3",
     "turndown": "^6.0.0",
-    "serverless-http": "^2.3.2",
+    "serverless-http": "^2.4.0",
     "utf-8-validate": "^5.0.2"
   }
 }
