@@ -33,7 +33,7 @@
     "moment": "^2.25.1",
     "netlify-lambda": "^1.6.3",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.4",
     "turndown": "^6.0.0",
     "serverless-http": "^2.4.1",
     "utf-8-validate": "^5.0.2"
