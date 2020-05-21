@@ -1,3 +1,4 @@
 [build]
+  NODE_VERSION = "10.20.1"
   command = "npm install && npm run build"
   functions = "functions"
