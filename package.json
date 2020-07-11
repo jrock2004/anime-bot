@@ -28,7 +28,7 @@
     "bufferutil": "^4.0.1",
     "canvas": "^2.6.1",
     "dotenv-webpack": "^2.0.0",
-    "encoding": "^0.1.12",
+    "encoding": "^0.1.13",
     "express": "^4.17.1",
     "moment": "^2.26.0",
     "netlify-lambda": "^1.6.3",
