@@ -12,7 +12,7 @@ export default function expressApp() {
     securityToken = process.env.TOKEN || uuidv4();
 
   router.use(compression());
-  app.use(bodyParser.json());
+  app.use(express.json());
 
   // Set router base path for local dev
   const routerBasePath = process.env.NODE_ENV === 'dev' ? `/` : `/.netlify/functions/`;
@@ -24,6 +24,7 @@ export default function expressApp() {
     console.log('ENV Token', process.env.TOKEN);
     console.log('Token var', securityToken);
     console.log('Req Body: ', req.body);
+    console.log('Req Token: ', token);
 
     let anime = new animeModel({
       searchTerm: text,
