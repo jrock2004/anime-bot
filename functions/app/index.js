@@ -51,8 +51,8 @@ export default function expressApp() {
   app.use(routerBasePath, router);
 
   // Apply some middlewares
-  router.use(app.json());
-  router.use(app.urlencoded({ extended: true }));
+  router.use(express.json());
+  router.use(express.urlencoded({ extended: true }));
 
   return app;
 }
