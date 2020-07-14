@@ -29,9 +29,7 @@ export default function expressApp() {
     if (securityToken.indexOf(token) > -1) {
       let requests = new internalRequests(anime, req, res);
 
-      const response = await requests.searchAnime();
-
-      anime.jsonResponse.text = response;
+      anime.jsonResponse.text = await requests.searchAnime();
 
       res.send(anime.jsonResponse);
     } else {

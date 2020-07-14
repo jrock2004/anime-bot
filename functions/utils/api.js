@@ -1,5 +1,5 @@
 require('es6-promise').polyfill();
-require('isomorphic-fetch');
+const fetch = require('isomorphic-fetch');
 
 const moment = require('moment');
 
@@ -14,23 +14,28 @@ export default class internalRequests {
     this.isMarkdown = req.body.response_url.indexOf('slack') > -1 ? false : true;
   }
 
+  /**
+   * Look up an anime
+   *
+   * @returns {string} The description about the anime
+   */
   async searchAnime() {
     const variables = {
       anime: this.anime.searchTerm,
     };
 
-    const url = 'https://graphql.anilist.co';
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        query: animeQuery,
-        variables: variables,
-      }),
-    };
+    const url = 'https://graphql.anilist.co',
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          query: animeQuery,
+          variables: variables,
+        }),
+      };
 
     return await fetch(url, options)
       .then(this.handleResponse)
@@ -40,24 +45,47 @@ export default class internalRequests {
       .catch((e) => this.handleError(e));
   }
 
+  /**
+   * Takes the response and converts it to json or rejects the promise
+   *
+   * @param {object} response Response object from fetch
+   * @returns {object}
+   */
   handleResponse(response) {
     return response.json().then((json) => {
       return response.ok ? json : Promise.reject(json);
     });
   }
 
+  /**
+   * Grabs the return data and calls the function to build response
+   *
+   * @param {object} data Json response from fetch
+   * @returns {string}
+   */
   handleData(data) {
     const response = data.data.Media;
 
     return this.buildAnime(response);
   }
 
+  /**
+   * When there is a problem, this will log the error and return an error in the API
+   *
+   * @param {object} error
+   */
   handleError(error) {
     console.log('ERROR: ', error);
 
     return 'Anime not found!';
   }
 
+  /**
+   * Take the response from the API call and format it to look nice
+   *
+   * @param {object} anime
+   * @returns {string}
+   */
   buildAnime(anime) {
     let responseText = '';
 
@@ -72,6 +100,12 @@ export default class internalRequests {
     return responseText;
   }
 
+  /**
+   * Creates the text for a link to a cover image for the anime
+   *
+   * @param {object} anime
+   * @returns {string}
+   */
   getBannerImage(anime) {
     const title = anime.title.english || anime.title.romaji || anime.native;
 
@@ -82,6 +116,12 @@ export default class internalRequests {
     }
   }
 
+  /**
+   * Creates the text for the title and the status of the anime
+   *
+   * @param {object} anime
+   * @returns {string}
+   */
   getTitle(anime) {
     const title = anime.title.english || anime.title.romaji || anime.native;
 
@@ -92,6 +132,12 @@ export default class internalRequests {
     }
   }
 
+  /**
+   * Creates the text for when the next episode is airing
+   *
+   * @param {object} anime
+   * @returns {string}
+   */
   getNextEpisode(anime) {
     if (anime.status !== 'FINISHED') {
       let nextEpisodeInSeconds = anime.nextAiringEpisode.timeUntilAiring,
@@ -114,6 +160,12 @@ export default class internalRequests {
     }
   }
 
+  /**
+   * Creates the text for the status of the manga
+   *
+   * @param {object} manga
+   * @returns {string}
+   */
   getRunningStatus(manga) {
     if (this.isMarkdown) {
       return `* **Status:** ${manga.status}\n`;
@@ -122,6 +174,12 @@ export default class internalRequests {
     }
   }
 
+  /**
+   * Creates the text for the list genres for the given anime
+   *
+   * @param {object} anime
+   * @returns {string}
+   */
   getGenres(anime) {
     let genres = [];
 
@@ -134,6 +192,12 @@ export default class internalRequests {
     }
   }
 
+  /**
+   * Creates the text for the links for the given anime
+   *
+   * @param {object} anime
+   * @returns {string}
+   */
   getExternalLinks(anime) {
     let externalLinks = '';
 
@@ -156,6 +220,11 @@ export default class internalRequests {
     return '';
   }
 
+  /**
+   * Creates the text for the source of where the information is coming from
+   *
+   * @returns {string}
+   */
   getSource() {
     if (this.isMarkdown) {
       return '* **Source:** [Anilist](https://anilist.co) \n\n';

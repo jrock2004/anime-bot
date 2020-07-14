@@ -5,8 +5,14 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: 'eslint:recommended',
+  globals: {
+    exports: true,
+    require: true,
+  },
+  plugins: ['node'],
+  extends: ['eslint:recommended', 'plugin:node/recommended-module'],
   parserOptions: {
-    ecmaVersion: 11,
+    ecmaVersion: 2020,
+    sourceType: 'module',
   },
 };

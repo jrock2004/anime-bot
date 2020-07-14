@@ -34,6 +34,8 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
+    "eslint": "^7.4.0",
+    "eslint-plugin-node": "^11.1.0",
     "netlify-lambda": "^1.6.3"
   },
   "proxy": {
@@ -43,5 +45,8 @@
         "^/\\.netlify/functions": ""
       }
     }
+  },
+  "engines": {
+    "node": ">13.0.0"
   }
 }
