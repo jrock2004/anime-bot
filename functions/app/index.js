@@ -13,6 +13,7 @@ export default function expressApp() {
 
   router.use(compression());
   app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
   // Set router base path for local dev
   const routerBasePath = process.env.NODE_ENV === 'dev' ? `/` : `/.netlify/functions/`;
@@ -50,8 +51,8 @@ export default function expressApp() {
   app.use(routerBasePath, router);
 
   // Apply some middlewares
-  router.use(bodyParser.json());
-  router.use(bodyParser.urlencoded({ extended: true }));
+  router.use(app.json());
+  router.use(app.urlencoded({ extended: true }));
 
   return app;
 }
