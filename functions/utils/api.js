@@ -1,41 +1,22 @@
-const moment = require('moment'),
-  TurndownService = require('turndown').default,
-  turndownService = new TurndownService(),
-  fetch = require('node-fetch').default;
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 
-module.exports = class internalRequests {
+const moment = require('moment');
+
+import { animeQuery } from './queries';
+
+export default class internalRequests {
   constructor(anime, req, res) {
     this.req = req;
     this.res = res;
     this.anime = anime;
-    this.isMarkdown = true;
+    this.isMarkdown = req.body.response_url.indexOf('slack') > -1 ? false : true;
   }
 
-  searchManga() {
+  async searchAnime() {
     const variables = {
       anime: this.anime.searchTerm,
     };
-
-    const query = `
-      query ($anime: String) {
-        Media (search: $anime, type: MANGA) {
-          id,
-          bannerImage,
-          title {
-            romaji
-            english
-            native
-          },
-          status,
-          description,
-          genres,
-          externalLinks {
-            url,
-            site
-          },  
-        }
-      }
-    `;
 
     const url = 'https://graphql.anilist.co';
     const options = {
@@ -45,69 +26,17 @@ module.exports = class internalRequests {
         Accept: 'application/json',
       },
       body: JSON.stringify({
-        query: query,
+        query: animeQuery,
         variables: variables,
       }),
     };
 
-    fetch(url, options)
+    return await fetch(url, options)
       .then(this.handleResponse)
       .then((data) => {
-        this.handleData(data, this, false);
+        return this.handleData(data, this, true);
       })
-      .catch((e) => this.handleError(e, this));
-  }
-
-  searchAnime() {
-    const variables = {
-      anime: this.anime.searchTerm,
-    };
-
-    const query = `
-      query ($anime: String) {
-        Media (search: $anime, type: ANIME) {
-          id
-          bannerImage
-          title {
-            romaji
-            english
-            native
-          },
-          status
-          description
-          nextAiringEpisode {
-            timeUntilAiring
-            episode
-          }
-          episodes
-          genres
-          externalLinks {
-            url
-            site
-          }
-        }
-      }
-    `;
-
-    const url = 'https://graphql.anilist.co';
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        query: query,
-        variables: variables,
-      }),
-    };
-
-    fetch(url, options)
-      .then(this.handleResponse)
-      .then((data) => {
-        this.handleData(data, this, true);
-      })
-      .catch((e) => this.handleError(e, this));
+      .catch((e) => this.handleError(e));
   }
 
   handleResponse(response) {
@@ -116,28 +45,16 @@ module.exports = class internalRequests {
     });
   }
 
-  handleData(data, self, isAnime) {
+  handleData(data) {
     const response = data.data.Media;
 
-    if (self.req.body.response_url.indexOf('slack') > -1) {
-      self.isMarkdown = false;
-    }
-
-    if (isAnime) {
-      self.anime.jsonResponse.text = self.buildAnime(response);
-    } else {
-      self.anime.jsonResponse.text = self.buildManga(response);
-    }
-
-    self.res.send(self.anime.jsonResponse);
+    return this.buildAnime(response);
   }
 
-  handleError(error, self) {
-    console.log(error);
+  handleError(error) {
+    console.log('ERROR: ', error);
 
-    self.anime.jsonResponse.text = 'Anime not found!';
-
-    self.res.send(self.anime.jsonResponse);
+    return 'Anime not found!';
   }
 
   buildAnime(anime) {
@@ -145,24 +62,10 @@ module.exports = class internalRequests {
 
     responseText += this.getBannerImage(anime);
     responseText += this.getTitle(anime);
-    responseText += `> ${turndownService.turndown(anime.description).replace(/\n/g, ' ')}\n\n`;
+    responseText += `> ${anime.description.replace(/\n/g, ' ')}\n\n`;
     responseText += this.getNextEpisode(anime);
     responseText += this.getGenres(anime);
     responseText += this.getExternalLinks(anime);
-    responseText += this.getSource();
-
-    return responseText;
-  }
-
-  buildManga(manga) {
-    let responseText = '';
-
-    responseText += this.getBannerImage(manga);
-    responseText += this.getTitle(manga);
-    responseText += `> ${turndownService.turndown(manga.description).replace(/\n/g, ' ')}\n\n`;
-    responseText += this.getRunningStatus(manga);
-    responseText += this.getGenres(manga);
-    responseText += this.getExternalLinks(manga);
     responseText += this.getSource();
 
     return responseText;
@@ -259,4 +162,4 @@ module.exports = class internalRequests {
       return '• *Source:* Anilist\n\n';
     }
   }
-};
+}

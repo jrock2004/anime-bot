@@ -4,9 +4,8 @@
   "description": "A bot for Slack and Mattermost to look up anime",
   "main": "functions/server.js",
   "scripts": {
-    "build": "netlify-lambda build --config ./webpack.functions.js express",
-    "serve": "netlify-lambda serve --config ./webpack.functions.js express",
-    "start": "nodemon server-local.js"
+    "start": "NODE_ENV=dev TOKEN=9999 netlify-lambda serve functions",
+    "build": "netlify-lambda build functions"
   },
   "repository": {
     "type": "git",
@@ -23,20 +22,26 @@
     "url": "https://github.com/jrock2004/anime-bot/issues"
   },
   "homepage": "https://github.com/jrock2004/anime-bot#readme",
-  "devDependencies": {
+  "dependencies": {
     "body-parser": "^1.19.0",
-    "bufferutil": "^4.0.1",
-    "canvas": "^2.6.1",
-    "dotenv-webpack": "^2.0.0",
-    "encoding": "^0.1.13",
+    "compression": "^1.7.4",
+    "es6-promise": "^4.2.8",
     "express": "^4.17.1",
-    "minimist": "^1.2.5",
+    "isomorphic-fetch": "^2.2.1",
     "moment": "^2.27.0",
-    "netlify-lambda": "^1.6.3",
-    "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.4",
     "serverless-http": "^2.5.0",
     "turndown": "^6.0.0",
-    "utf-8-validate": "^5.0.2"
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "netlify-lambda": "^1.6.3"
+  },
+  "proxy": {
+    "/.netlify/functions": {
+      "target": "http://localhost:9000",
+      "pathRewrite": {
+        "^/\\.netlify/functions": ""
+      }
+    }
   }
 }
