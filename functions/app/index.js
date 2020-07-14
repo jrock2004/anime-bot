@@ -1,6 +1,5 @@
 import express from 'express';
 import compression from 'compression';
-import bodyParser from 'body-parser';
 import { v4 as uuidv4 } from 'uuid';
 
 import animeModel from '../models/anime';
@@ -21,11 +20,6 @@ export default function expressApp() {
   // Route stuff goes here
   router.post('/anime', async (req, res) => {
     let { text, token } = req.body;
-
-    console.log('ENV Token', process.env.TOKEN);
-    console.log('Token var', securityToken);
-    console.log('Req Body: ', req.body);
-    console.log('Req Token: ', token);
 
     let anime = new animeModel({
       searchTerm: text,
