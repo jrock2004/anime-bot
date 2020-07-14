@@ -31,10 +31,9 @@ export default function expressApp() {
 
       const response = await requests.searchAnime();
 
-      res.json({
-        id: 1,
-        name: response,
-      });
+      anime.jsonResponse.text = response;
+
+      res.send(anime.jsonResponse);
     } else {
       anime.jsonResponse.text = 'Token does not match';
 
