@@ -24,19 +24,5 @@
   },
   "homepage": "https://github.com/jrock2004/anime-bot#readme",
   "devDependencies": {
-    "body-parser": "^1.19.0",
-    "bufferutil": "^4.0.1",
-    "canvas": "^2.6.1",
-    "dotenv-webpack": "^2.0.0",
-    "encoding": "^0.1.13",
-    "express": "^4.17.1",
-    "minimist": "^1.2.5",
-    "moment": "^2.27.0",
-    "netlify-lambda": "^1.6.3",
-    "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.4",
-    "serverless-http": "^2.5.0",
-    "turndown": "^6.0.0",
-    "utf-8-validate": "^5.0.2"
   }
 }
