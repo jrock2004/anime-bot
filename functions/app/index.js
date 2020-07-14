@@ -21,6 +21,10 @@ export default function expressApp() {
   router.post('/anime', async (req, res) => {
     let { text, token } = req.body;
 
+    console.log('ENV Token', process.env.TOKEN);
+    console.log('Token var', securityToken);
+    console.log('Req Body: ', req.body);
+
     let anime = new animeModel({
       searchTerm: text,
     });
