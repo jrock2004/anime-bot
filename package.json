@@ -34,7 +34,7 @@
     "uuid": "^8.2.0"
   },
   "devDependencies": {
-    "eslint": "^7.4.0",
+    "eslint": "^7.5.0",
     "eslint-plugin-node": "^11.1.0",
     "netlify-lambda": "^2.0.0"
   },
