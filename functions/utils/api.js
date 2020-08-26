@@ -91,7 +91,7 @@ export default class internalRequests {
 
     responseText += this.getBannerImage(anime);
     responseText += this.getTitle(anime);
-    responseText += `> ${stripHtml(anime.description).replace(/\n/g, ' ')}\n\n`;
+    responseText += `> ${stripHtml(anime.description).result.replace(/\n/g, ' ')}\n\n`;
     responseText += this.getNextEpisode(anime);
     responseText += this.getGenres(anime);
     responseText += this.getExternalLinks(anime);
