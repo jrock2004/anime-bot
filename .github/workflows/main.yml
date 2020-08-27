@@ -3,6 +3,11 @@ name: 'Netlify Deploy'
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  DEPLOY: false
 
 jobs:
   build:
@@ -10,13 +15,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Deploy on pushes
+        if: github.event_name == 'push'
+        run: echo "::set-env name=DEPLOY::true"
+
       - uses: jsmrcaga/action-netlify-deploy@master
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} 
           NETLIFY_SITE_ID: "2e95c1ff-4501-4563-84c3-ce7161e02c2f" 
           NETLIFY_DEPLOY_MESSAGE: "${{ github.event.head_commit.message }}"
-          NETLIFY_DEPLOY_TO_PROD: true
-      - name: 'Github Context'
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+          NETLIFY_DEPLOY_TO_PROD: ${{ env.DEPLOY }}
+      # - name: 'Github Context'
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
