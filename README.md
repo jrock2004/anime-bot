@@ -1,6 +1,6 @@
 # anime-bot
 
-A bot for Slack and Mattermost to look up anime and display information on it.
+A bot for Slack and Mattermost to look up anime info and display information on it.
 
 **Mattermost Example:**
 ![Screenshot of an example of what bot will return](anime-mattermost-bot.png?raw=true)
