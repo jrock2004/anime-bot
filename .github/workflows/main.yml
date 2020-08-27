@@ -14,5 +14,5 @@ jobs:
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} 
           NETLIFY_SITE_ID: "2e95c1ff-4501-4563-84c3-ce7161e02c2f" 
-          NETLIFY_DEPLOY_MESSAGE: "${{ github.event.header_commit.message }}"
+          NETLIFY_DEPLOY_MESSAGE: "${{ github.event.head_commit.message }}"
           NETLIFY_DEPLOY_TO_PROD: true
