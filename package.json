@@ -27,7 +27,7 @@
     "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "isomorphic-fetch": "^2.2.1",
-    "moment": "^2.29.0",
+    "moment": "^2.29.1",
     "serverless-http": "^2.6.0",
     "string-strip-html": "^6.0.4",
     "turndown": "^6.0.0",
