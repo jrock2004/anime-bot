@@ -30,7 +30,7 @@
     "moment": "^2.29.1",
     "serverless-http": "^2.6.0",
     "string-strip-html": "^6.0.4",
-    "turndown": "^6.0.0",
+    "turndown": "^7.0.0",
     "uuid": "^8.3.1"
   },
   "devDependencies": {
