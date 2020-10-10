@@ -1,11 +1,13 @@
 {
   "name": "anime-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A bot for Slack and Mattermost to look up anime",
   "main": "functions/server.js",
   "scripts": {
     "start": "NODE_ENV=dev TOKEN=9999 netlify-lambda serve functions",
-    "build": "netlify-lambda build functions"
+    "build": "netlify-lambda build functions",
+    "version:bump": "standard-version",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -23,12 +25,16 @@
   },
   "homepage": "https://github.com/jrock2004/anime-bot#readme",
   "dependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "compression": "^1.7.4",
+    "cz-conventional-changelog": "^3.3.0",
     "es6-promise": "^4.2.8",
     "express": "^4.17.1",
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.29.1",
     "serverless-http": "^2.6.0",
+    "standard-version": "^9.0.0",
     "string-strip-html": "^6.0.4",
     "turndown": "^7.0.0",
     "uuid": "^8.3.1"
@@ -36,6 +42,7 @@
   "devDependencies": {
     "eslint": "^7.10.0",
     "eslint-plugin-node": "^11.1.0",
+    "husky": "^4.3.0",
     "netlify-lambda": "^2.0.1"
   },
   "proxy": {
@@ -48,5 +55,10 @@
   },
   "engines": {
     "node": ">13.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
