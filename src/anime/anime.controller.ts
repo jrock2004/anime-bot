@@ -102,4 +102,8 @@ const setResponse = (anime: Anime, isMarkdown: boolean): string => {
   return responseText;
 };
 
+console.log('Router Base Path', routerBasePath);
+
+console.log(router);
+
 export default router;
