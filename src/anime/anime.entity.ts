@@ -9,7 +9,7 @@ export default class Anime {
   bannerImage: string;
 
   @Column()
-  title: object;
+  title: Title;
 
   @Column()
   status: string;
@@ -17,15 +17,31 @@ export default class Anime {
   @Column()
   description: string;
 
-  @Column({nullable: true})
-  nextAiringEpisode: object;
+  @Column({ nullable: true })
+  nextAiringEpisode: NextAiringEpisode;
 
   @Column()
   episodes: number;
 
   @Column()
-  genres: [];
+  genres: Array<string>;
 
   @Column()
-  externalLinks: [];
+  externalLinks: Array<ExternalLink>;
+}
+
+interface Title {
+  romaji: string;
+  english: string;
+  native: string;
+}
+
+interface NextAiringEpisode {
+  timeUntilAiring?: number;
+  episode?: number;
+}
+
+interface ExternalLink {
+  url: string;
+  site: string;
 }
