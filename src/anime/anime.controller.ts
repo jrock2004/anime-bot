@@ -16,7 +16,7 @@ import {
   getSource,
 } from '../utils/helpers';
 
-const routerBasePath = process.env.NODE_ENV === 'dev' ? `/` : `/.netlify/functions-build/`;
+const routerBasePath = process.env.NODE_ENV === 'dev' ? `/` : `/.netlify/functions/`;
 
 const routerOpts: Router.IRouterOptions = {
   prefix: `${routerBasePath}anime`,
