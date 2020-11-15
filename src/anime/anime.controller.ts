@@ -19,7 +19,7 @@ import {
 const routerBasePath = process.env.NODE_ENV === 'dev' ? `/` : `/.netlify/functions/`;
 
 const routerOpts: Router.IRouterOptions = {
-  prefix: `${routerBasePath}anime`,
+  prefix: `${routerBasePath}`,
 };
 
 const router: Router = new Router(routerOpts);
