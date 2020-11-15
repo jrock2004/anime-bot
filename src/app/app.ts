@@ -4,7 +4,7 @@ import * as bodyParser from 'koa-bodyparser';
 
 import animeController from '../anime/anime.controller';
 
-const app:Koa = new Koa();
+const app: Koa = new Koa();
 
 // Allows us to parse body from API calls
 app.use(bodyParser());
@@ -27,5 +27,7 @@ app.use(animeController.allowedMethods());
 
 // Application error logging.
 app.on('error', console.error);
+
+exports.handler = app;
 
 export default app;
