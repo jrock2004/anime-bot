@@ -16,7 +16,7 @@ import {
   getSource,
 } from '../utils/helpers';
 
-const routerBasePath = process.env.NODE_ENV === 'dev' ? `/` : `/.netlify/functions/`;
+const routerBasePath = process.env.NODE_ENV === 'dev' ? `/` : `/.netlify/functions-build/`;
 
 const routerOpts: Router.IRouterOptions = {
   prefix: `${routerBasePath}anime`,
@@ -101,8 +101,6 @@ const setResponse = (anime: Anime, isMarkdown: boolean): string => {
 
   return responseText;
 };
-
-console.log('Router Base Path', routerBasePath);
 
 console.log(router);
 
