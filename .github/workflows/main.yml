@@ -15,10 +15,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy on pushes
-        if: github.event_name == 'push'
-        run: echo "::set-env name=DEPLOY::true"
-
       - uses: jsmrcaga/action-netlify-deploy@master
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} 
