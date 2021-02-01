@@ -38,7 +38,7 @@
     "es6-promise": "^4.2.8",
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.29.1",
-    "serverless-http": "^2.6.0",
+    "serverless-http": "^2.7.0",
     "standard-version": "^9.0.0",
     "string-strip-html": "^7.0.3",
     "uuid": "^8.3.2"
