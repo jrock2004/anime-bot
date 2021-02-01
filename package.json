@@ -40,7 +40,7 @@
     "moment": "^2.29.1",
     "serverless-http": "^2.7.0",
     "standard-version": "^9.1.0",
-    "string-strip-html": "^7.0.3",
+    "string-strip-html": "^8.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
