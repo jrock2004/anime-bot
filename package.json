@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/jrock2004/anime-bot#readme",
   "dependencies": {
-    "@commitlint/cli": "^11.0.0",
+    "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^11.0.0",
     "compression": "^1.7.4",
     "@types/uuid": "^8.3.0",
