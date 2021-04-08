@@ -39,7 +39,7 @@
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.29.1",
     "serverless-http": "^2.7.0",
-    "standard-version": "^9.1.1",
+    "standard-version": "^9.2.0",
     "string-strip-html": "^8.2.11",
     "uuid": "^8.3.2"
   },
