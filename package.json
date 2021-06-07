@@ -50,7 +50,7 @@
     "@types/koa-router": "^7.4.2",
     "@types/node": "^15.6.0",
     "encoding": "^0.1.13",
-    "eslint": "^7.27.0",
+    "eslint": "^7.28.0",
     "eslint-plugin-node": "^11.1.0",
     "http-status-codes": "^2.1.4",
     "husky": "^6.0.0",
