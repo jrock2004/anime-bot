@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/http-status-codes": "^1.2.0",
     "@types/koa": "^2.13.3",
-    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-bodyparser": "^4.3.1",
     "@types/koa-router": "^7.4.2",
     "@types/node": "^15.6.0",
     "encoding": "^0.1.13",
