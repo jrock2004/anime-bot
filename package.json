@@ -1,6 +1,6 @@
 {
   "name": "anime-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A bot for Slack and Mattermost to look up anime",
   "main": "functions/server.js",
   "scripts": {

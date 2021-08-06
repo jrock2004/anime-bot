@@ -1,5 +1,5 @@
-import * as Koa from 'koa';
-import * as Router from 'koa-router';
+import Koa from 'koa';
+import Router from 'koa-router';
 import { StatusCodes } from 'http-status-codes';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -43,8 +43,6 @@ router.post('/', async (ctx: Koa.Context) => {
 
   if (securityToken.indexOf(token) === -1) {
     ctx.throw(StatusCodes.UNAUTHORIZED);
-
-    return;
   }
 
   let response = await api.search(variables, animeQuery);
