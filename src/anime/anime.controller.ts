@@ -43,8 +43,6 @@ router.post('/', async (ctx: Koa.Context) => {
 
   if (securityToken.indexOf(token) === -1) {
     ctx.throw(StatusCodes.UNAUTHORIZED);
-
-    return;
   }
 
   let response = await api.search(variables, animeQuery);
