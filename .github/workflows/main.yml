@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: jsmrcaga/action-netlify-deploy@1.1.0
+      - uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} 
           NETLIFY_SITE_ID: "2e95c1ff-4501-4563-84c3-ce7161e02c2f" 
