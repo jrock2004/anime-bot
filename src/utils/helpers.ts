@@ -1,7 +1,8 @@
 import Anime from '../anime/anime.entity';
 
-const moment = require('moment');
-const stripHtml = require('string-strip-html');
+// const moment = require('moment');
+import moment from 'moment';
+import { stripHtml } from "string-strip-html";
 
 export const getBannerImage = (anime: Anime, isMarkdown: boolean): string => {
   const title = anime.title.english || anime.title.romaji || anime.title.native;

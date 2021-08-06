@@ -1,6 +1,6 @@
-import * as Koa from 'koa';
-import * as HttpStatus from 'http-status-codes';
-import * as bodyParser from 'koa-bodyparser';
+import Koa from 'koa';
+import HttpStatus from 'http-status-codes';
+import bodyParser from 'koa-bodyparser';
 
 import animeController from '../anime/anime.controller';
 
